@@ -71,14 +71,14 @@ class PygameRender():
         self.screen.blit(surface, (0, 0,))
 
 
-        for ally in self.allies:
+        for i, ally in enumerate(self.allies):
             if ally.alive:
                 if ally.type == FIGHTER_TYPE['reconnaissance']:
                     ally_reconn = pygame.transform.rotate(self.ally_reconn, -ally.ori*180/np.pi-90)
                     self.screen.blit(ally_reconn, (ally.pos[0] * MAP_SCALE, ally.pos[1] * MAP_SCALE))
                     
                     if self.draw_reconn_detect_range:
-                        pygame.draw.circle(self.screen, (255, 0, 0), (ally.pos[0] * MAP_SCALE, ally.pos[1] * MAP_SCALE), self.args.fighter.reconnaissance.detect_range * MAP_SCALE, self.args.render_setting.circle_width)
+                        pygame.draw.circle(self.screen, (255, 0, 0), (ally.pos[0] * MAP_SCALE, ally.pos[1] * MAP_SCALE), self.args.fighter.reconnaissance.ally.detect_range[i] * MAP_SCALE, self.args.render_setting.circle_width)
                    
                 elif ally.type == FIGHTER_TYPE['cannon']:
                     ally_cannon = pygame.transform.rotate(self.ally_cannon, -ally.ori*180/np.pi-90)
@@ -87,12 +87,12 @@ class PygameRender():
                     if self.draw_damage_range:
                         ally_points = self._get_pie_points(((ally.pos[0]) * MAP_SCALE, (ally.pos[1]) * MAP_SCALE), 
                                                             ally.ori,
-                                                            self.args.fighter.cannon.damage_turn_range,
-                                                         self.args.fighter.cannon.damage_range * MAP_SCALE)
+                                                            self.args.fighter.cannon.ally.damage_turn_range[i - self.args.env.n_ally_reconn],
+                                                         self.args.fighter.cannon.ally.damage_range[i - self.args.env.n_ally_reconn] * MAP_SCALE)
                         pygame.gfxdraw.filled_polygon(self.screen, ally_points, (255, 0, 0, 96))
 
                     if self.draw_fighter_detect_range:
-                        pygame.draw.circle(self.screen, (255, 0, 0, 32), (ally.pos[0] * MAP_SCALE, ally.pos[1] * MAP_SCALE), self.args.fighter.cannon.detect_range * MAP_SCALE, self.args.render_setting.circle_width)
+                        pygame.draw.circle(self.screen, (255, 0, 0, 32), (ally.pos[0] * MAP_SCALE, ally.pos[1] * MAP_SCALE), self.args.fighter.cannon.ally.detect_range[i - self.args.env.n_ally_reconn] * MAP_SCALE, self.args.render_setting.circle_width)
                     
                 else:
                     ally_missile = pygame.transform.rotate(self.ally_missile, -ally.ori*180/np.pi-90)
@@ -105,14 +105,14 @@ class PygameRender():
                         pygame.draw.circle(surface, (255, 0, 0, 32), (ally.pos[0] * MAP_SCALE, ally.pos[1] * MAP_SCALE), self.args.fighter.missile.damage_range * MAP_SCALE, 0)
                         self.screen.blit(surface, (0, 0))
 
-        for enemy in self.enemies:
+        for i, enemy in enumerate(self.allies):
             if enemy.alive:
                 if enemy.type == FIGHTER_TYPE['reconnaissance']:
                     enemy_reconn = pygame.transform.rotate(self.enemy_reconn, -enemy.ori*180/np.pi-90)
                     self.screen.blit(enemy_reconn, (enemy.pos[0] * MAP_SCALE, enemy.pos[1] * MAP_SCALE))
                     
                     if self.draw_reconn_detect_range:
-                        pygame.draw.circle(self.screen, (0, 0, 255, 32), (enemy.pos[0] * MAP_SCALE, enemy.pos[1] * MAP_SCALE), self.args.fighter.reconnaissance.detect_range * MAP_SCALE, self.args.render_setting.circle_width)
+                        pygame.draw.circle(self.screen, (0, 0, 255, 32), (enemy.pos[0] * MAP_SCALE, enemy.pos[1] * MAP_SCALE), self.args.fighter.reconnaissance.enemy.detect_range[i] * MAP_SCALE, self.args.render_setting.circle_width)
                    
                 elif enemy.type == FIGHTER_TYPE['cannon']:
                     enemy_cannon = pygame.transform.rotate(self.enemy_cannon, -enemy.ori*180/np.pi-90)
@@ -121,12 +121,12 @@ class PygameRender():
                     if self.draw_damage_range:
                         enemy_points = self._get_pie_points(((enemy.pos[0]) * MAP_SCALE, (enemy.pos[1]) * MAP_SCALE), 
                                                             np.array([enemy.ori]),
-                                                            self.args.fighter.cannon.damage_turn_range,
-                                                            self.args.fighter.cannon.damage_range * MAP_SCALE)
+                                                            self.args.fighter.cannon.enemy.damage_turn_range[i - self.args.env.n_ally_reconn],
+                                                            self.args.fighter.cannon.enemy.damage_range[i - self.args.env.n_ally_reconn] * MAP_SCALE)
                         pygame.gfxdraw.filled_polygon(self.screen, enemy_points, (0, 0, 255, 96))
 
                     if self.draw_fighter_detect_range:
-                        pygame.draw.circle(self.screen, (0, 0, 255, 32), (enemy.pos[0] * MAP_SCALE, enemy.pos[1] * MAP_SCALE), self.args.fighter.cannon.detect_range * MAP_SCALE, self.args.render_setting.circle_width)
+                        pygame.draw.circle(self.screen, (0, 0, 255, 32), (enemy.pos[0] * MAP_SCALE, enemy.pos[1] * MAP_SCALE), self.args.fighter.cannon.enemy.detect_range[i - self.args.env.n_ally_reconn] * MAP_SCALE, self.args.render_setting.circle_width)
                     
                 elif enemy.type == STATIONARY_TYPE['radar']:
                     enemy_radar = pygame.transform.rotate(self.enemy_radar, 0)

@@ -79,23 +79,56 @@ class BaseSimulator():
                 side = 0
 
             # spec info
-            spec_info = self._get_specifical_fighter_info(ally.type)
+            # spec_info = self._get_specifical_fighter_info(ally.type, is_ally=True)
 
-            base_info = {
-                'id': i+1,
-                'side': side,
-                'pos': pos,
-                'ori': ori,
-                'speed': self.args.fighter.speed,
-                'bloods': self.args.fighter.bloods,
-                'turn_range': self.args.fighter.turn_range,
-                'map_x_limit': self.args.simulator.map_x_limit,
-                'map_y_limit': self.args.simulator.map_y_limit,
-                'detect_range': spec_info['detect_range'],
-                'damage': spec_info['damage'],
-                'damage_range': spec_info['damage_range'],
-                'damage_turn_range': spec_info['damage_turn_range'],
-            }
+            # base_info = {
+            #     'id': i+1,
+            #     'side': side,
+            #     'pos': pos,
+            #     'ori': ori,
+            #     'speed': self.args.fighter.speed,
+            #     'bloods': self.args.fighter.bloods,
+            #     'turn_range': self.args.fighter.turn_range,
+            #     'map_x_limit': self.args.simulator.map_x_limit,
+            #     'map_y_limit': self.args.simulator.map_y_limit,
+            #     'detect_range': spec_info['detect_range'],
+            #     'damage': spec_info['damage'],
+            #     'damage_range': spec_info['damage_range'],
+            #     'damage_turn_range': spec_info['damage_turn_range'],
+            # }
+
+            if ally.type == FIGHTER_TYPE['reconnaissance']:
+                base_info = {
+                    'id': i+1,
+                    'side': side,
+                    'pos': pos,
+                    'ori': ori,
+                    'map_x_limit': self.args.simulator.map_x_limit,
+                    'map_y_limit': self.args.simulator.map_y_limit,
+                    'speed': self.args.fighter.reconnaissance.ally.speed[i],
+                    'bloods': self.args.fighter.reconnaissance.ally.bloods[i],
+                    'turn_range': self.args.fighter.reconnaissance.ally.turn_range[i],
+                    'detect_range': self.args.fighter.reconnaissance.ally.detect_range[i],
+                    'damage': self.args.fighter.reconnaissance.ally.damage[i],
+                    'damage_range': self.args.fighter.reconnaissance.ally.damage_range[i],
+                    'damage_turn_range': self.args.fighter.reconnaissance.ally.damage_turn_range[i],
+                }
+            elif ally.type == FIGHTER_TYPE['cannon']:
+                base_info = {
+                    'id': i+1,
+                    'side': side,
+                    'pos': pos,
+                    'ori': ori,
+                    'map_x_limit': self.args.simulator.map_x_limit,
+                    'map_y_limit': self.args.simulator.map_y_limit,
+                    'speed': self.args.fighter.cannon.ally.speed[i - self.args.env.n_ally_reconn],
+                    'bloods': self.args.fighter.cannon.ally.bloods[i - self.args.env.n_ally_reconn],
+                    'turn_range': self.args.fighter.cannon.ally.turn_range[i - self.args.env.n_ally_reconn],
+                    'detect_range': self.args.fighter.cannon.ally.detect_range[i - self.args.env.n_ally_reconn],
+                    'damage': self.args.fighter.cannon.ally.damage[i - self.args.env.n_ally_reconn],
+                    'damage_range': self.args.fighter.cannon.ally.damage_range[i - self.args.env.n_ally_reconn],
+                    'damage_turn_range': self.args.fighter.cannon.ally.damage_turn_range[i - self.args.env.n_ally_reconn],
+                }
 
             # initialize
             ally.initialize(base_info)
@@ -118,23 +151,55 @@ class BaseSimulator():
                 side = 1
 
             # spec info
-            spec_info = self._get_specifical_fighter_info(enemy.type)
-
-            base_info = {
-                'id': i+1,
-                'side': side,
-                'pos': pos,
-                'ori': ori,
-                'speed': self.args.fighter.speed,
-                'bloods': self.args.fighter.bloods,
-                'turn_range': self.args.fighter.turn_range,
-                'map_x_limit': self.args.simulator.map_x_limit,
-                'map_y_limit': self.args.simulator.map_y_limit,
-                'detect_range': spec_info['detect_range'],
-                'damage': spec_info['damage'],
-                'damage_range': spec_info['damage_range'],
-                'damage_turn_range': spec_info['damage_turn_range'],
-            }
+            # spec_info = self._get_specifical_fighter_info(enemy.type, is_ally=False)
+            # base_info = {
+            #         'id': i+1,
+            #         'side': side,
+            #         'pos': pos,
+            #         'ori': ori,
+            #         'speed': self.args.fighter.speed,
+            #         'bloods': self.args.fighter.bloods,
+            #         'turn_range': self.args.fighter.turn_range,
+            #         'map_x_limit': self.args.simulator.map_x_limit,
+            #         'map_y_limit': self.args.simulator.map_y_limit,
+            #         'detect_range': spec_info['detect_range'],
+            #         'damage': spec_info['damage'],
+            #         'damage_range': spec_info['damage_range'],
+            #         'damage_turn_range': spec_info['damage_turn_range'],
+            #     }
+            if enemy.type == FIGHTER_TYPE['reconnaissance']:
+                base_info = {
+                    'id': i+1,
+                    'side': side,
+                    'pos': pos,
+                    'ori': ori,
+                    'map_x_limit': self.args.simulator.map_x_limit,
+                    'map_y_limit': self.args.simulator.map_y_limit,
+                    'speed': self.args.fighter.reconnaissance.enemy.speed[i],
+                    'bloods': self.args.fighter.reconnaissance.enemy.bloods[i],
+                    'turn_range': self.args.fighter.reconnaissance.enemy.turn_range[i],
+                    'detect_range': self.args.fighter.reconnaissance.enemy.detect_range[i],
+                    'damage': self.args.fighter.reconnaissance.enemy.damage[i],
+                    'damage_range': self.args.fighter.reconnaissance.enemy.damage_range[i],
+                    'damage_turn_range': self.args.fighter.reconnaissance.enemy.damage_turn_range[i],
+                }
+            elif enemy.type == FIGHTER_TYPE['cannon']:
+                base_info = {
+                    'id': i+1,
+                    'side': side,
+                    'pos': pos,
+                    'ori': ori,
+                    'map_x_limit': self.args.simulator.map_x_limit,
+                    'map_y_limit': self.args.simulator.map_y_limit,
+                    'speed': self.args.fighter.cannon.enemy.speed[i - self.args.env.n_ally_reconn],
+                    'bloods': self.args.fighter.cannon.enemy.bloods[i - self.args.env.n_ally_reconn],
+                    'turn_range': self.args.fighter.cannon.enemy.turn_range[i - self.args.env.n_ally_reconn],
+                    'detect_range': self.args.fighter.cannon.enemy.detect_range[i - self.args.env.n_ally_reconn],
+                    'damage': self.args.fighter.cannon.enemy.damage[i - self.args.env.n_ally_reconn],
+                    'damage_range': self.args.fighter.cannon.enemy.damage_range[i - self.args.env.n_ally_reconn],
+                    'damage_turn_range': self.args.fighter.cannon.enemy.damage_turn_range[i - self.args.env.n_ally_reconn],
+                }
+            
 
             # initialize
             enemy.initialize(base_info)
@@ -209,6 +274,7 @@ class BaseSimulator():
         fighter_damage_val = [0 for _ in range(len(fighters))] #fighter攻击量计算
 
         for i, (fighter, action) in enumerate(zip(fighters, actions)):
+            print(action)
             attack_target = action[1]
             if fighter.alive and attack_target in fighter.detect_enemies and self._can_attack(fighter, enemy_fighters[attack_target-1]):
                 be_attack_list[attack_target-1].append(fighter.damage)
@@ -281,17 +347,27 @@ class BaseSimulator():
                 enemy.detect_allies = list(set(enemy.detect_allies).union(set(enemy_reconn_detect_allies)))
                 enemy.detect_enemies = list(set(enemy.detect_enemies).union(set(enemy_reconn_detect_enemies)))
 
-    def _get_specifical_fighter_info(self, fighter_type):
+    def _get_specifical_fighter_info(self, fighter_type, is_ally=False):
         """获取fighter info
         """
         spec_info = {}
         if fighter_type == FIGHTER_TYPE['cannon']:
-            spec_info = {
-                'detect_range': self.args.fighter.cannon.detect_range,
-                'damage': self.args.fighter.cannon.damage,
-                'damage_range': self.args.fighter.cannon.damage_range,
-                'damage_turn_range': self.args.fighter.cannon.damage_turn_range,
-            }
+            if is_ally:
+                spec_info = {
+                    'speed': self.args.fighter.cannon.ally.speed,
+                    'bloods': self.args.fighter.cannon.ally.bloods,
+                    'detect_range': self.args.fighter.cannon.ally.detect_range,
+                    'damage': self.args.fighter.cannon.damage,
+                    'damage_range': self.args.fighter.cannon.damage_range,
+                    'damage_turn_range': self.args.fighter.cannon.damage_turn_range,
+                }
+            else:
+                spec_info = {
+                    'detect_range': self.args.fighter.cannon.detect_range,
+                    'damage': self.args.fighter.cannon.damage,
+                    'damage_range': self.args.fighter.cannon.damage_range,
+                    'damage_turn_range': self.args.fighter.cannon.damage_turn_range,
+                }
         elif fighter_type == FIGHTER_TYPE['missile']:
             spec_info = {
                 'detect_range': self.args.fighter.missile.detect_range,

@@ -5,7 +5,7 @@ from MACA.env.cannon_reconn_hierarical import CannonReconnHieraricalEnv
 from MACA.render.gif_generator import gif_generate
 
 if __name__ == '__main__':
-    env = CannonReconnHieraricalEnv({"render": True})
+    env = CannonReconnHieraricalEnv({"render": True}, 'dz_easy_yg')
 
     env.reset()
 
@@ -15,15 +15,15 @@ if __name__ == '__main__':
     while not done:
         time.sleep(0.05)
 
-        # actions = {
-        #     '1': [0.0], 
-        #     '2': [0.0], 
-        #     '3': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-        #     '4': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-        #     '5': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-        #     '6': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-        #     '7': [0.0, {'is_attack': 1, 'attack_target': 2}]
-        # }
+        actions = {
+            '1': [0.0], 
+            '2': [0.0], 
+            '3': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+            '4': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+            '5': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+            '6': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+            '7': [0.0, {'is_attack': 1, 'attack_target': 2}]
+        }
 
         # actions = {
         #     '1': [0.0], 
@@ -33,12 +33,12 @@ if __name__ == '__main__':
         #     '5': [0.0, {'is_attack': 1, 'attack_target': 2}], 
         #     '6': [0.0, {'is_attack': 1, 'attack_target': 2}], 
         # }
-        actions = {
-            '1': [0.0], 
-            '2': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            '3': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            '4': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-        }
+        # actions = {
+        #     '1': [0.0], 
+        #     '2': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+        #     '3': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+        #     '4': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+        # }
 
     
         obs, reward, dones, info = env.step(actions)

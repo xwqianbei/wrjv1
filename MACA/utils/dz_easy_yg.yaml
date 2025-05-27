@@ -50,19 +50,23 @@ fighter:
     # 特有信息
     cannon:
         ally:
-            speed: 40
+            speed: [40, 40, 40, 40, 40]
+            bloods: [100, 100, 100, 100, 100]
+            turn_range: [0.26, 0.26, 0.26, 0.26, 0.26]
             attack_precent: 1.0
-            detect_range: 70
-            damage: 10
-            damage_range: 50
-            damage_turn_range: 1.04
+            detect_range: [70, 70, 70, 70, 70]
+            damage: [10, 10, 10, 10, 10]
+            damage_range: [50, 50, 50, 50, 50]
+            damage_turn_range: [1.04, 1.04, 1.04, 1.04, 1.04]
         enemy:
-            speed: 40
+            speed: [40, 40, 40, 40, 40]
+            bloods: [100, 100, 100, 100, 100]
+            turn_range: [0.26, 0.26, 0.26, 0.26, 0.26]
             attack_precent: 1.0
-            detect_range: 70
-            damage: 10
-            damage_range: 50
-            damage_turn_range: 1.04
+            detect_range: [70, 70, 70, 70, 70]
+            damage: [10, 10, 10, 10, 10]
+            damage_range: [50, 50, 50, 50, 50]
+            damage_turn_range: [1.04, 1.04, 1.04, 1.04, 1.04]
     missile:
         ally:
             attack_precent: 0.5
@@ -78,15 +82,21 @@ fighter:
             damage_turn_range: 3.14
     reconnaissance:
         ally:
-            detect_range: 200
-            damage: 0
-            damage_range: 0
-            damage_turn_range: 0
+            speed: [40, 40]
+            bloods: [100, 100]
+            turn_range: [0.26, 0.26]
+            detect_range: [200, 200]
+            damage: [0, 0]
+            damage_range: [0, 0]
+            damage_turn_range: [0, 0]
         enemy:
-            detect_range: 200
-            damage: 0
-            damage_range: 0
-            damage_turn_range: 0
+            speed: [40, 40]
+            bloods: [100, 100]
+            turn_range: [0.26, 0.26]
+            detect_range: [200, 200]
+            damage: [0, 0]
+            damage_range: [0, 0]
+            damage_turn_range: [0, 0]
 
 rl:
     max_time_step: 600
