@@ -48,7 +48,7 @@ class CannonFighter(BaseFighter):
             # calc attack
             attack = 0 # default non attack
             if len(self.detect_enemies) != 0:
-                if np.random.uniform(0, 1) < self.args.fighter.cannon.attack_precent:
+                if np.random.uniform(0, 1) < self.args.fighter.cannon.enemy.attack_precent:
                     attack = self.detect_enemies[0]
                 else:
                     attack = 0
