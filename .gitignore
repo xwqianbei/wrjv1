@@ -1,9 +1,9 @@
-__pycache__/
 *.pyc
+__pycache__/
 .DS_Store
 model/
 # result/
 results/
 *.txt
 *pth
-tmp/
+*.png
