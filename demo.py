@@ -16,13 +16,13 @@ if __name__ == '__main__':
         time.sleep(0.05)
 
         actions = [
-            [0.0], 
-            [0.0], 
-            [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            [0.0, {'is_attack': 1, 'attack_target': 2}]
+            [0.0, 0], 
+            [0.0, 0], 
+            [0.0, 1], 
+            [0.0, 1], 
+            [0.0, 1], 
+            [0.0, 1], 
+            [0.0, 1]
         ]
         # actions = {
         #     '1': [0.0], 
