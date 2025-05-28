@@ -15,15 +15,24 @@ if __name__ == '__main__':
     while not done:
         time.sleep(0.05)
 
-        actions = {
-            '1': [0.0], 
-            '2': [0.0], 
-            '3': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            '4': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            '5': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            '6': [0.0, {'is_attack': 1, 'attack_target': 2}], 
-            '7': [0.0, {'is_attack': 1, 'attack_target': 2}]
-        }
+        actions = [
+            [0.0], 
+            [0.0], 
+            [0.0, {'is_attack': 1, 'attack_target': 2}], 
+            [0.0, {'is_attack': 1, 'attack_target': 2}], 
+            [0.0, {'is_attack': 1, 'attack_target': 2}], 
+            [0.0, {'is_attack': 1, 'attack_target': 2}], 
+            [0.0, {'is_attack': 1, 'attack_target': 2}]
+        ]
+        # actions = {
+        #     '1': [0.0], 
+        #     '2': [0.0], 
+        #     '3': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+        #     '4': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+        #     '5': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+        #     '6': [0.0, {'is_attack': 1, 'attack_target': 2}], 
+        #     '7': [0.0, {'is_attack': 1, 'attack_target': 2}]
+        # }
 
         # actions = {
         #     '1': [0.0], 
@@ -46,7 +55,7 @@ if __name__ == '__main__':
         done = dones['__all__']
 
         step += 1
-        total_damage += sum([item[1] for item in info['1']['ally_damage'].items()])
+        total_damage += sum([item[1] for item in info['ally_damage'].items()])
     gif_generate('test.gif')
     print(f'total damage: {total_damage}')
 
