@@ -202,6 +202,7 @@ class CannonReconnHieraricalWrapper():
 
     def _cannon_reward_wrapper(self, fighter, game_status):
         attack_reward = game_status['ally_info'][fighter.id]['damage_val'] * self.args.rl.reward.cannon_attack
+        be_attack_penalty = game_status['ally_info'][fighter.id]['be_attack_val'] * self.args.rl.reward.fighter_be_attack
         time_penalty = float(self.args.rl.reward.time_penalty)
 
         final_reward = 0
@@ -212,10 +213,11 @@ class CannonReconnHieraricalWrapper():
         elif game_status['n_alive_enemy'] == 0:
             final_reward = self.args.rl.reward.win
 
-        return attack_reward + time_penalty + final_reward
+        return attack_reward + time_penalty + final_reward + be_attack_penalty
     
     def _reconn_reward_wrapper(self, fighter, game_status):
         detect_reward = len(fighter.detect_enemies) * self.args.rl.reward.reconn_detect
+        be_attack_penalty = game_status['ally_info'][fighter.id]['be_attack_val'] * self.args.rl.reward.fighter_be_attack
         time_penalty = float(self.args.rl.reward.time_penalty)
 
         final_reward = 0
@@ -225,5 +227,5 @@ class CannonReconnHieraricalWrapper():
             final_reward = self.args.rl.reward.lose
         elif game_status['n_alive_enemy'] == 0:
             final_reward = self.args.rl.reward.win
-        return detect_reward + time_penalty + final_reward
+        return detect_reward + time_penalty + final_reward + be_attack_penalty
     

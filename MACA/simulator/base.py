@@ -160,7 +160,7 @@ class BaseSimulator():
             # initialize
             enemy.initialize(base_info)
         
-        return self.get_game_status(None)
+        return self.get_game_status(None, None)
 
     def step(self, actions):
         # update detect info
@@ -188,9 +188,9 @@ class BaseSimulator():
             attack = action[1]
             enemy.step(direct, enemy_be_attack, attack)
         
-        return self.get_game_status(ally_attack_val)
+        return self.get_game_status(ally_attack_val, ally_be_attack_list)
     
-    def get_game_status(self, ally_attack_val):
+    def get_game_status(self, ally_attack_val, ally_be_attack_list):
         game_status = {}
 
         n_alive_ally = 0
@@ -205,6 +205,8 @@ class BaseSimulator():
             game_status['ally_info'][ally.id]['ori'] = ally.ori
             if ally_attack_val:
                 game_status['ally_info'][ally.id]['damage_val'] = ally_attack_val[i]
+            if ally_be_attack_list:
+                game_status['ally_info'][ally.id]['be_attack_val'] = sum(ally_be_attack_list[i])
 
             if ally.alive:
                 n_alive_ally += 1
